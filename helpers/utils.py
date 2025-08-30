@@ -33,10 +33,14 @@ def NAME_TO_WIDTH(name):
 
 
 import csv
+import io
+from importlib import resources as importlib_resources
 
-# Load label
-with open('metadata/class_labels_indices.csv', 'r') as f:
-    reader = csv.reader(f, delimiter=',')
+# Load label from packaged resource
+with importlib_resources.open_binary('metadata', 'class_labels_indices.csv') as f:  # type: ignore[arg-type]
+    # decode bytes to text
+    text_stream = io.TextIOWrapper(f, encoding='utf-8')
+    reader = csv.reader(text_stream, delimiter=',')
     lines = list(reader)
 
 labels = []
