@@ -1,4 +1,4 @@
-av==10.0.0
+av>=12.0.0
 h5py
 librosa
 numpy
